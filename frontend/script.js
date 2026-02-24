@@ -22,10 +22,12 @@ confirmBtn.onclick = async () => {
     }
   });
 
-  const res = await fetch("https://onboarding-portal-hy20.onrender.com/upload", {
-    method:"POST",
-    body:formData
-  });
+ const API = "https://onboarding-portal-hy20.onrender.com";
+
+const res = await fetch(`${API}/upload`, {
+  method: "POST",
+  body: formData
+});
 
   if(res.ok){
     toast.innerText="Documents Uploaded Successfully";
