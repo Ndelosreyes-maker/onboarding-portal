@@ -59,3 +59,38 @@ const res = await fetch(`${API}/upload`, {
     toast.style.display="block";
   }
 };
+
+function showProgress(item){
+  document.getElementById("employeeName").innerText =
+    "Employee: " + item.name;
+
+  const fileColumns = [
+    "file_mm02syqk",
+    "file_mm027d47",
+    "file_mm02dgx5",
+    "file_mm02vxj1",
+    "file_mm02wc6g",
+    "file_mm02tfs6",
+    "file_mm02q4hg",
+    "file_mm02xndg",
+    "file_mm02b5af",
+    "file_mm02nz2j",
+    "file_mm02g17x",
+    "file_mm02cpd1",
+    "file_mm023e5h",
+    "file_mm028qz9",
+    "file_mm02n1k4",
+    "file_mm025qv4"
+  ];
+
+  let done = 0;
+
+  item.column_values.forEach(col=>{
+    if(fileColumns.includes(col.id) && col.value){
+      done++;
+    }
+  });
+
+  const percent = (done / fileColumns.length) * 100;
+  document.getElementById("progressBar").style.width = percent + "%";
+}
