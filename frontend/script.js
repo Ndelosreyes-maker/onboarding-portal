@@ -6,11 +6,28 @@ portalInput.addEventListener("blur", async () => {
   const portalId = portalInput.value.trim();
   if (!portalId) return;
 
+portalInput.addEventListener("blur", async () => {
+  const portalId = portalInput.value.trim();
+  if (!portalId) return;
+
   const res = await fetch(`${API}/lookup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ portalId })
   });
+
+  if (!res.ok) return;
+
+  const item = await res.json();
+
+  document.getElementById("profileResult").innerHTML = `
+    <div class="profileCard" onclick="openPortal('${portalId}')">
+      ${item.name}
+    </div>
+  `;
+
+  window.cachedItem = item;
+});
 
   if (!res.ok) return;
 
@@ -107,4 +124,11 @@ function showProgress(item){
 
   document.getElementById("counts").innerText =
     `${completed} completed • ${total-completed} pending`;
+}
+
+function openPortal(){
+  document.getElementById("searchScreen").style.display = "none";
+  document.getElementById("portalScreen").style.display = "block";
+
+  showProgress(window.cachedItem);
 }
