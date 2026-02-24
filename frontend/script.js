@@ -22,7 +22,7 @@ confirmBtn.onclick = async () => {
     }
   });
 
-  const res = await fetch("YOUR_RENDER_URL/upload",{
+  const res = await fetch("https://onboarding-portal-hy20.onrender.com/upload", {
     method:"POST",
     body:formData
   });
