@@ -14,7 +14,10 @@ const upload = multer({ dest: "uploads/" });
 const MONDAY_KEY = process.env.MONDAY_API_KEY;
 const BOARD_ID = 18397647993;
 
-// 🔍 Find item by Portal ID
+/* ===============================
+   FIND ITEM BY PORTAL ID
+================================ */
+
 async function findItemByPortalId(portalId) {
   const query = `
     query {
@@ -25,7 +28,15 @@ async function findItemByPortalId(portalId) {
           column_values: ["${portalId}"]
         }]
       ) {
-        items { id }
+        items {
+          id
+          name
+          column_values {
+            id
+            text
+            value
+          }
+        }
       }
     }
   `;
@@ -40,10 +51,18 @@ async function findItemByPortalId(portalId) {
   });
 
   const data = await res.json();
-  return data.data.items_page_by_column_values.items[0]?.id;
+
+  if (!data.data || !data.data.items_page_by_column_values.items.length) {
+    return null;
+  }
+
+  return data.data.items_page_by_column_values.items[0];
 }
 
-// 📎 Upload file
+/* ===============================
+   UPLOAD FILE TO MONDAY
+================================ */
+
 async function uploadFile(itemId, columnId, filePath) {
   const form = new FormData();
 
@@ -59,14 +78,26 @@ async function uploadFile(itemId, columnId, filePath) {
 
   form.append("variables[file]", fs.createReadStream(filePath));
 
-  await fetch("https://api.monday.com/v2/file", {
+  const response = await fetch("https://api.monday.com/v2/file", {
     method: "POST",
-    headers: { Authorization: MONDAY_KEY },
+    headers: {
+      Authorization: MONDAY_KEY
+    },
     body: form
   });
+
+  const text = await response.text();
+
+  if (!response.ok) {
+    console.error("File Upload Error:", text);
+    throw new Error(text);
+  }
 }
 
-// 📅 Update date
+/* ===============================
+   UPDATE DATE COLUMN
+================================ */
+
 async function updateDate(itemId, columnId, date) {
   const query = `
     mutation {
@@ -78,7 +109,7 @@ async function updateDate(itemId, columnId, date) {
     }
   `;
 
-  await fetch("https://api.monday.com/v2", {
+  const res = await fetch("https://api.monday.com/v2", {
     method: "POST",
     headers: {
       Authorization: MONDAY_KEY,
@@ -86,22 +117,59 @@ async function updateDate(itemId, columnId, date) {
     },
     body: JSON.stringify({ query })
   });
+
+  const data = await res.text();
+
+  if (!res.ok) {
+    console.error("Date Update Error:", data);
+    throw new Error(data);
+  }
 }
+
+/* ===============================
+   LOOKUP ROUTE
+================================ */
+
+app.post("/lookup", async (req, res) => {
+  try {
+    const { portalId } = req.body;
+
+    const item = await findItemByPortalId(portalId);
+
+    if (!item) {
+      return res.status(404).json({ error: "Invalid Portal ID" });
+    }
+
+    res.json(item);
+
+  } catch (err) {
+    console.error("Lookup Error:", err.message);
+    res.status(500).json({ error: "Lookup failed" });
+  }
+});
+
+/* ===============================
+   UPLOAD ROUTE
+================================ */
 
 app.post("/upload", upload.any(), async (req, res) => {
   try {
     const { portalId, physicalExp, liabilityExp, registrationExp } = req.body;
 
-    const itemId = await findItemByPortalId(portalId);
+    const item = await findItemByPortalId(portalId);
 
-    if (!itemId) {
-      return res.status(404).send("Invalid Portal ID");
+    if (!item) {
+      return res.status(404).json({ error: "Invalid Portal ID" });
     }
 
+    const itemId = item.id;
+
+    // Upload files
     for (let file of req.files) {
       await uploadFile(itemId, file.fieldname, file.path);
     }
 
+    // Update expiration dates
     if (physicalExp)
       await updateDate(itemId, "date_mm02gj3n", physicalExp);
 
@@ -111,12 +179,17 @@ app.post("/upload", upload.any(), async (req, res) => {
     if (registrationExp)
       await updateDate(itemId, "date_mm02ew9z", registrationExp);
 
-    res.send("Success");
+    res.json({ success: true });
+
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Upload failed");
+    console.error("Upload Route Error:", err.message);
+    res.status(500).json({ error: "Upload failed", detail: err.message });
   }
 });
+
+/* ===============================
+   START SERVER
+================================ */
 
 app.listen(process.env.PORT || 3000, () =>
   console.log("Server running")
