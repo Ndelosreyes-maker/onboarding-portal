@@ -61,36 +61,50 @@ const res = await fetch(`${API}/upload`, {
 };
 
 function showProgress(item){
-  document.getElementById("employeeName").innerText =
-    "Employee: " + item.name;
 
-  const fileColumns = [
-    "file_mm02syqk",
-    "file_mm027d47",
-    "file_mm02dgx5",
-    "file_mm02vxj1",
-    "file_mm02wc6g",
-    "file_mm02tfs6",
-    "file_mm02q4hg",
-    "file_mm02xndg",
-    "file_mm02b5af",
-    "file_mm02nz2j",
-    "file_mm02g17x",
-    "file_mm02cpd1",
-    "file_mm023e5h",
-    "file_mm028qz9",
-    "file_mm02n1k4",
-    "file_mm025qv4"
+  // show name immediately
+  document.getElementById("employeeName").innerText =
+    item.name;
+
+  // THESE are your status columns
+  const statusColumns = [
+    "color_mm02nvg7", // SSN Stat
+    "color_mm02f6sk", // PETS Stat
+    "color_mm02w1nr", // Statewide Stat
+    "color_mm02wex8", // I9 Stat
+    "color_mm0282sv", // Physical Stat
+    "color_mm02fvcg", // Liability Stat
+    "color_mm0260zc", // Registration Stat
+    "color_mm02fjyq", // Direct Deposit Stat
+    "color_mm02kpx9", // W2 Stat
+    "color_mm02rh5m", // TSSLD Stat
+    "color_mm02sw49", // Medicaid Stat
+    "color_mm025cqk", // P&P Stat
+    "color_mm02n84j", // 4A Stat
+    "color_mm02tp34", // 4B Stat
+    "color_mm02m91t", // ID Stat
+    "color_mm02mqdj"  // License Stat
   ];
 
-  let done = 0;
+  let completed = 0;
 
   item.column_values.forEach(col=>{
-    if(fileColumns.includes(col.id) && col.value){
-      done++;
+    if(statusColumns.includes(col.id)){
+      if(col.text && col.text.toLowerCase().includes("done")){
+        completed++;
+      }
+      if(col.text && col.text.includes("✓")){
+        completed++;
+      }
     }
   });
 
-  const percent = (done / fileColumns.length) * 100;
-  document.getElementById("progressBar").style.width = percent + "%";
+  const total = statusColumns.length;
+  const percent = (completed / total) * 100;
+
+  document.getElementById("progressBar").style.width =
+    percent + "%";
+
+  document.getElementById("counts").innerText =
+    `${completed} completed • ${total-completed} pending`;
 }
