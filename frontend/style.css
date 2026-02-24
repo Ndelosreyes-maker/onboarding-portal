@@ -108,3 +108,15 @@ label{
 .profileCard:hover{
   background:#374151;
 }
+
+.profileCard{
+  background:#1f2937;
+  padding:14px;
+  border-radius:12px;
+  margin-top:12px;
+  cursor:pointer;
+  font-weight:600;
+}
+.profileCard:hover{
+  background:#374151;
+}
