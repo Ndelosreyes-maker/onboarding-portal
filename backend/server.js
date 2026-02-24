@@ -22,19 +22,26 @@ const BOARD_ID = 18397647993;
 
 /* ================= FIND ITEM ================= */
 async function findItem(portalId){
-  const query = `
-  query {
-    items_page_by_column_values(
-      board_id:${BOARD_ID},
-      columns:[{
-        column_id:"pulse_id_mm0wa6sj",
-        column_values:["${portalId}"]
-      }]
-    ){
-      items{ id name }
+ const query = `
+query {
+  items_page_by_column_values(
+    board_id:${BOARD_ID},
+    columns:[{
+      column_id:"pulse_id_mm0wa6sj",
+      column_values:["${portalId}"]
+    }]
+  ){
+    items{
+      id
+      name
+      column_values{
+        id
+        text
+        value
+      }
     }
-  }`;
-
+  }
+}`;
   const r = await fetch("https://api.monday.com/v2",{
     method:"POST",
     headers:{
