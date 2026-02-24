@@ -10,112 +10,69 @@
 <div class="container">
 <h1>Employee Document Portal</h1>
 
-<p id="employeeName"></p>
-    <p id="counts"></p>
-
-<div class="card">
-
+<!-- SEARCH SCREEN -->
 <div id="searchScreen">
-  <input id="portalId" placeholder="Enter your Portal ID">
-  <div id="profileResult"></div>
-</div>
 
-<div id="portalScreen" style="display:none;">
-  <!-- your existing document UI stays here -->
-</div>
-
-    <div class="progress-wrapper">
-  <div class="progress-bar" id="progressBar"></div>
+  <div class="card">
+    <input id="portalId" placeholder="Enter your Portal ID">
+    <div id="profileResult"></div>
   </div>
 
-<h3>Documents</h3>
-
-<div class="row">
-<label>Signed Contract</label>
-<input type="file" name="file_mm02syqk">
 </div>
 
-<div class="row">
-<label>SSN</label>
-<input type="file" name="file_mm027d47">
-</div>
+<!-- PORTAL SCREEN -->
+<div id="portalScreen" style="display:none;">
 
-<div class="row">
-<label>PETS</label>
-<input type="file" name="file_mm02dgx5">
-</div>
+  <p id="employeeName"></p>
+  <p id="counts"></p>
 
-<div class="row">
-<label>Statewide</label>
-<input type="file" name="file_mm02vxj1">
-</div>
+  <div class="progress-wrapper">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
 
-<div class="row">
-<label>I-9</label>
-<input type="file" name="file_mm02wc6g">
-</div>
+  <div class="card">
 
-<div class="row">
-<label>Physical</label>
-<input type="file" name="file_mm02tfs6">
-<input type="date" id="physicalExp">
-</div>
+    <h3>Documents</h3>
 
-<div class="row">
-<label>Liability Insurance</label>
-<input type="file" name="file_mm02q4hg">
-<input type="date" id="liabilityExp">
-</div>
+    <div class="row"><label>Signed Contract</label><input type="file" name="file_mm02syqk"></div>
+    <div class="row"><label>SSN</label><input type="file" name="file_mm027d47"></div>
+    <div class="row"><label>PETS</label><input type="file" name="file_mm02dgx5"></div>
+    <div class="row"><label>Statewide</label><input type="file" name="file_mm02vxj1"></div>
+    <div class="row"><label>I-9</label><input type="file" name="file_mm02wc6g"></div>
 
-<div class="row">
-<label>Registration</label>
-<input type="file" name="file_mm02xndg">
-<input type="date" id="registrationExp">
-</div>
+    <div class="row">
+      <label>Physical</label>
+      <input type="file" name="file_mm02tfs6">
+      <input type="date" id="physicalExp">
+    </div>
 
-<div class="row">
-<label>Direct Deposit</label>
-<input type="file" name="file_mm02b5af">
-</div>
+    <div class="row">
+      <label>Liability Insurance</label>
+      <input type="file" name="file_mm02q4hg">
+      <input type="date" id="liabilityExp">
+    </div>
 
-<div class="row">
-<label>W-2/4/9</label>
-<input type="file" name="file_mm02nz2j">
-</div>
+    <div class="row">
+      <label>Registration</label>
+      <input type="file" name="file_mm02xndg">
+      <input type="date" id="registrationExp">
+    </div>
 
-<div class="row">
-<label>Medicaid</label>
-<input type="file" name="file_mm02g17x">
-</div>
+    <div class="row"><label>Direct Deposit</label><input type="file" name="file_mm02b5af"></div>
+    <div class="row"><label>W-2/4/9</label><input type="file" name="file_mm02nz2j"></div>
+    <div class="row"><label>Medicaid</label><input type="file" name="file_mm02g17x"></div>
+    <div class="row"><label>P & P</label><input type="file" name="file_mm02cpd1"></div>
+    <div class="row"><label>4A NYS</label><input type="file" name="file_mm023e5h"></div>
+    <div class="row"><label>4B NYS</label><input type="file" name="file_mm028qz9"></div>
+    <div class="row"><label>ID</label><input type="file" name="file_mm02n1k4"></div>
+    <div class="row"><label>License</label><input type="file" name="file_mm025qv4"></div>
 
-<div class="row">
-<label>P & P</label>
-<input type="file" name="file_mm02cpd1">
-</div>
+    <button id="submitBtn">Submit Documents</button>
 
-<div class="row">
-<label>4A NYS</label>
-<input type="file" name="file_mm023e5h">
-</div>
-
-<div class="row">
-<label>4B NYS</label>
-<input type="file" name="file_mm028qz9">
-</div>
-
-<div class="row">
-<label>ID</label>
-<input type="file" name="file_mm02n1k4">
-</div>
-
-<div class="row">
-<label>License</label>
-<input type="file" name="file_mm025qv4">
-</div>
-
-<button id="submitBtn">Submit Documents</button>
+  </div>
 
 </div>
+
 </div>
 
 <div id="toast"></div>
