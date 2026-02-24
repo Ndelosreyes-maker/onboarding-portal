@@ -1,3 +1,23 @@
+const API = "https://onboarding-portal-hy2o.onrender.com";
+
+const portalInput = document.getElementById("portalId");
+
+portalInput.addEventListener("blur", async () => {
+  const portalId = portalInput.value.trim();
+  if (!portalId) return;
+
+  const res = await fetch(`${API}/lookup`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ portalId })
+  });
+
+  if (!res.ok) return;
+
+  const item = await res.json();
+  showProgress(item);
+});
+
 const modal = document.getElementById("modal");
 const submitBtn = document.getElementById("submitBtn");
 const confirmBtn = document.getElementById("confirmBtn");
