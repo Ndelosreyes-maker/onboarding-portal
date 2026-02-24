@@ -122,3 +122,24 @@ function showProgress(item){
   document.getElementById("counts").innerText =
     `${completed} completed • ${total-completed} pending`;
 }
+
+function updateDocStatuses(item){
+
+  const rows = document.querySelectorAll(".docRow");
+
+  rows.forEach(row=>{
+    const colId = row.dataset.col;
+
+    const column = item.column_values.find(c=>c.id===colId);
+
+    if(!column) return;
+
+    if(column.text && (column.text.includes("✓") || column.text.toLowerCase().includes("done"))){
+      row.querySelector(".status").innerText = "✓ Uploaded";
+      row.querySelector(".status").style.color = "#22c55e";
+    }else{
+      row.querySelector(".status").innerText = "Pending";
+      row.querySelector(".status").style.color = "#f59e0b";
+    }
+  });
+}
