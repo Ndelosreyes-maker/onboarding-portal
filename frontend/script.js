@@ -38,6 +38,7 @@ function openPortal(){
     window.cachedItem.name;
 
   showProgress(window.cachedItem);
+  updateDocStatuses(window.cachedItem);
 }
 
 const modal = document.getElementById("modal");
