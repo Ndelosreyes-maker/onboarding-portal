@@ -96,3 +96,15 @@ label{
   border-radius:10px;
   transition:0.4s;
 }
+
+.profileCard{
+  background:#1f2937;
+  padding:14px;
+  border-radius:12px;
+  margin-top:10px;
+  cursor:pointer;
+  font-weight:600;
+}
+.profileCard:hover{
+  background:#374151;
+}
