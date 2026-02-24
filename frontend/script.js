@@ -126,7 +126,9 @@ function showProgress(item){
 
 function updateDocStatuses(item){
 
-  const rows = document.querySelectorAll(".docRow");
+  const rows = Array.from(document.querySelectorAll(".docRow"));
+
+  let completed = 0;
 
   rows.forEach(row=>{
     const colId = row.dataset.col;
@@ -142,30 +144,52 @@ function updateDocStatuses(item){
        column.text.toLowerCase().includes("done"));
 
     if(done){
+      completed++;
 
-      // show uploaded
       statusEl.innerText = "✓ Uploaded";
       statusEl.style.color = "#22c55e";
 
-      // REMOVE upload input
-      if(fileInput){
-        fileInput.style.display = "none";
-      }
-
-      // grey out row
-      row.style.opacity = "0.6";
+      if(fileInput) fileInput.style.display = "none";
+      row.classList.add("completed");
 
     }else{
-
       statusEl.innerText = "Pending";
       statusEl.style.color = "#f59e0b";
 
-      if(fileInput){
-        fileInput.style.display = "inline-block";
-      }
-
-      row.style.opacity = "1";
+      if(fileInput) fileInput.style.display = "inline-block";
+      row.classList.add("pending");
     }
   });
 
+  // sort pending to top
+  const container = document.getElementById("docList");
+  const sorted = rows.sort((a,b)=>{
+    return a.classList.contains("completed") -
+           b.classList.contains("completed");
+  });
+
+  sorted.forEach(r=>container.appendChild(r));
+
+  // banner if all done
+  if(completed === rows.length){
+    showAllDoneBanner();
+  }
+}
+
+function showAllDoneBanner(){
+
+  if(document.getElementById("doneBanner")) return;
+
+  const banner = document.createElement("div");
+  banner.id = "doneBanner";
+  banner.innerText = "All documents complete ✓";
+  banner.style.background = "#22c55e";
+  banner.style.color = "white";
+  banner.style.padding = "12px";
+  banner.style.marginBottom = "10px";
+  banner.style.borderRadius = "8px";
+  banner.style.textAlign = "center";
+
+  document.querySelector(".card")
+    .prepend(banner);
 }
