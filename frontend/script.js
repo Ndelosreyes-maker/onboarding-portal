@@ -4,7 +4,7 @@ document.getElementById("uploadForm").addEventListener("submit", async e=>{
 
   const formData = new FormData(e.target);
 
-  const res = await fetch("http://localhost:3000/upload",{
+  const res = await fetch("https://YOUR-RENDER-URL.onrender.com/upload", {
     method:"POST",
     body:formData
   });
