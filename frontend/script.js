@@ -1,14 +1,39 @@
+const modal = document.getElementById("modal");
+const submitBtn = document.getElementById("submitBtn");
+const confirmBtn = document.getElementById("confirmBtn");
+const cancelBtn = document.getElementById("cancelBtn");
+const toast = document.getElementById("toast");
 
-document.getElementById("uploadForm").addEventListener("submit", async e=>{
-  e.preventDefault();
+submitBtn.onclick = () => modal.style.display = "flex";
+cancelBtn.onclick = () => modal.style.display = "none";
 
-  const formData = new FormData(e.target);
+confirmBtn.onclick = async () => {
+  modal.style.display = "none";
 
-  const res = await fetch("https://YOUR-RENDER-URL.onrender.com/upload", {
+  const formData = new FormData();
+  formData.append("portalId", document.getElementById("portalId").value);
+  formData.append("physicalExp", document.getElementById("physicalExp").value);
+  formData.append("liabilityExp", document.getElementById("liabilityExp").value);
+  formData.append("registrationExp", document.getElementById("registrationExp").value);
+
+  document.querySelectorAll("input[type=file]").forEach(input=>{
+    if(input.files[0]){
+      formData.append(input.name, input.files[0]);
+    }
+  });
+
+  const res = await fetch("YOUR_RENDER_URL/upload",{
     method:"POST",
     body:formData
   });
 
-  const data = await res.text();
-  document.getElementById("msg").innerText = data;
-});
+  if(res.ok){
+    toast.innerText="Documents Uploaded Successfully";
+    toast.style.display="block";
+    setTimeout(()=>toast.style.display="none",3000);
+  } else {
+    toast.innerText="Upload Failed";
+    toast.style.background="#ef4444";
+    toast.style.display="block";
+  }
+};
