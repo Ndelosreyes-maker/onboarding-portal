@@ -1,19 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Onboarding Portal</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<title>Employee Document Portal</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Employee Upload Portal</h1>
+<div class="container">
 
-<form id="uploadForm">
-  <input type="file" name="file" required>
-  <button type="submit">Upload</button>
-</form>
+<h1>Employee Document Portal</h1>
 
-<p id="msg"></p>
+<div class="card">
+
+<input type="text" id="portalId" placeholder="Enter Your Portal ID" />
+
+<h3>Upload Documents</h3>
+
+<input type="file" name="file_mm02syqk" />
+<input type="file" name="file_mm027d47" />
+<input type="file" name="file_mm02dgx5" />
+<input type="file" name="file_mm02vxj1" />
+<input type="file" name="file_mm02wc6g" />
+<input type="file" name="file_mm02tfs6" />
+<input type="file" name="file_mm02q4hg" />
+<input type="file" name="file_mm02xndg" />
+<input type="file" name="file_mm02b5af" />
+<input type="file" name="file_mm02nz2j" />
+<input type="file" name="file_mm02g17x" />
+<input type="file" name="file_mm02cpd1" />
+<input type="file" name="file_mm023e5h" />
+<input type="file" name="file_mm028qz9" />
+<input type="file" name="file_mm02n1k4" />
+<input type="file" name="file_mm025qv4" />
+
+<h3>Expiration Dates</h3>
+
+<input type="date" id="physicalExp" />
+<input type="date" id="liabilityExp" />
+<input type="date" id="registrationExp" />
+
+<button id="submitBtn">Submit Documents</button>
+
+</div>
+</div>
+
+<div id="toast"></div>
+
+<div id="modal" class="modal">
+<div class="modal-content">
+<p>Are you sure you want to submit?</p>
+<button id="confirmBtn">Yes</button>
+<button id="cancelBtn">Cancel</button>
+</div>
+</div>
 
 <script src="script.js"></script>
 </body>
