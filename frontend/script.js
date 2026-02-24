@@ -22,7 +22,7 @@ confirmBtn.onclick = async () => {
     }
   });
 
- const API = "https://onboarding-portal-hy20.onrender.com";
+ const API = "https://onboarding-portal-hy2o.onrender.com";
 
 const res = await fetch(`${API}/upload`, {
   method: "POST",
