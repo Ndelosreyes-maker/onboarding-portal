@@ -8,37 +8,96 @@
 <body>
 
 <div class="container">
-
 <h1>Employee Document Portal</h1>
 
 <div class="card">
 
 <input type="text" id="portalId" placeholder="Enter Your Portal ID" />
 
-<h3>Upload Documents</h3>
+<h3>Documents</h3>
 
-<input type="file" name="file_mm02syqk" />
-<input type="file" name="file_mm027d47" />
-<input type="file" name="file_mm02dgx5" />
-<input type="file" name="file_mm02vxj1" />
-<input type="file" name="file_mm02wc6g" />
-<input type="file" name="file_mm02tfs6" />
-<input type="file" name="file_mm02q4hg" />
-<input type="file" name="file_mm02xndg" />
-<input type="file" name="file_mm02b5af" />
-<input type="file" name="file_mm02nz2j" />
-<input type="file" name="file_mm02g17x" />
-<input type="file" name="file_mm02cpd1" />
-<input type="file" name="file_mm023e5h" />
-<input type="file" name="file_mm028qz9" />
-<input type="file" name="file_mm02n1k4" />
-<input type="file" name="file_mm025qv4" />
+<div class="row">
+<label>Signed Contract</label>
+<input type="file" name="file_mm02syqk">
+</div>
 
-<h3>Expiration Dates</h3>
+<div class="row">
+<label>SSN</label>
+<input type="file" name="file_mm027d47">
+</div>
 
-<input type="date" id="physicalExp" />
-<input type="date" id="liabilityExp" />
-<input type="date" id="registrationExp" />
+<div class="row">
+<label>PETS</label>
+<input type="file" name="file_mm02dgx5">
+</div>
+
+<div class="row">
+<label>Statewide</label>
+<input type="file" name="file_mm02vxj1">
+</div>
+
+<div class="row">
+<label>I-9</label>
+<input type="file" name="file_mm02wc6g">
+</div>
+
+<div class="row">
+<label>Physical</label>
+<input type="file" name="file_mm02tfs6">
+<input type="date" id="physicalExp">
+</div>
+
+<div class="row">
+<label>Liability Insurance</label>
+<input type="file" name="file_mm02q4hg">
+<input type="date" id="liabilityExp">
+</div>
+
+<div class="row">
+<label>Registration</label>
+<input type="file" name="file_mm02xndg">
+<input type="date" id="registrationExp">
+</div>
+
+<div class="row">
+<label>Direct Deposit</label>
+<input type="file" name="file_mm02b5af">
+</div>
+
+<div class="row">
+<label>W-2/4/9</label>
+<input type="file" name="file_mm02nz2j">
+</div>
+
+<div class="row">
+<label>Medicaid</label>
+<input type="file" name="file_mm02g17x">
+</div>
+
+<div class="row">
+<label>P & P</label>
+<input type="file" name="file_mm02cpd1">
+</div>
+
+<div class="row">
+<label>4A NYS</label>
+<input type="file" name="file_mm023e5h">
+</div>
+
+<div class="row">
+<label>4B NYS</label>
+<input type="file" name="file_mm028qz9">
+</div>
+
+<div class="row">
+<label>ID</label>
+<input type="file" name="file_mm02n1k4">
+</div>
+
+<div class="row">
+<label>License</label>
+<input type="file" name="file_mm025qv4">
+</div>
 
 <button id="submitBtn">Submit Documents</button>
 
@@ -49,7 +108,7 @@
 
 <div id="modal" class="modal">
 <div class="modal-content">
-<p>Are you sure you want to submit?</p>
+<p>Submit documents?</p>
 <button id="confirmBtn">Yes</button>
 <button id="cancelBtn">Cancel</button>
 </div>
