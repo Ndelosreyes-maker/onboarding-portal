@@ -69,3 +69,15 @@ button:hover{
   padding:30px;
   border-radius:12px;
 }
+
+.row{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  margin-bottom:14px;
+}
+
+label{
+  font-size:13px;
+  color:#94a3b8;
+}
