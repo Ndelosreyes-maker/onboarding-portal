@@ -5,6 +5,22 @@ const profileResult = document.getElementById("profileResult");
 const portalScreen = document.getElementById("portalScreen");
 const searchScreen = document.getElementById("searchScreen");
 
+document.getElementById("refreshBtn").onclick = async () => {
+
+  const response = await fetch(`${API}/lookup`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ portalId: window.cachedPortalId })
+  });
+
+  const item = await response.json();
+  window.cachedItem = item;
+
+  showProgress(item);
+  updateDocStatuses(item);
+};
+
+
 portalInput.addEventListener("blur", async () => {
 
   const portalId = portalInput.value.trim();
