@@ -130,17 +130,42 @@ function updateDocStatuses(item){
 
   rows.forEach(row=>{
     const colId = row.dataset.col;
+    const statusEl = row.querySelector(".status");
+    const fileInput = row.querySelector("input[type=file]");
 
     const column = item.column_values.find(c=>c.id===colId);
-
     if(!column) return;
 
-    if(column.text && (column.text.includes("✓") || column.text.toLowerCase().includes("done"))){
-      row.querySelector(".status").innerText = "✓ Uploaded";
-      row.querySelector(".status").style.color = "#22c55e";
+    const done =
+      column.text &&
+      (column.text.includes("✓") ||
+       column.text.toLowerCase().includes("done"));
+
+    if(done){
+
+      // show uploaded
+      statusEl.innerText = "✓ Uploaded";
+      statusEl.style.color = "#22c55e";
+
+      // REMOVE upload input
+      if(fileInput){
+        fileInput.style.display = "none";
+      }
+
+      // grey out row
+      row.style.opacity = "0.6";
+
     }else{
-      row.querySelector(".status").innerText = "Pending";
-      row.querySelector(".status").style.color = "#f59e0b";
+
+      statusEl.innerText = "Pending";
+      statusEl.style.color = "#f59e0b";
+
+      if(fileInput){
+        fileInput.style.display = "inline-block";
+      }
+
+      row.style.opacity = "1";
     }
   });
+
 }
