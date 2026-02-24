@@ -81,3 +81,18 @@ label{
   font-size:13px;
   color:#94a3b8;
 }
+
+.progress-wrapper{
+  width:100%;
+  background:#334155;
+  height:10px;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+.progress-bar{
+  height:10px;
+  width:0%;
+  background:#22c55e;
+  border-radius:10px;
+  transition:0.4s;
+}
