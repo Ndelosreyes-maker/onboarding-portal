@@ -1,7 +1,12 @@
 const API = "https://onboarding-portal-hy2o.onrender.com";
+
 const portalInput = document.getElementById("portalId");
+const profileResult = document.getElementById("profileResult");
+const portalScreen = document.getElementById("portalScreen");
+const searchScreen = document.getElementById("searchScreen");
 
 portalInput.addEventListener("blur", async () => {
+
   const portalId = portalInput.value.trim();
   if (!portalId) return;
 
@@ -16,11 +21,24 @@ portalInput.addEventListener("blur", async () => {
   const item = await response.json();
 
   window.cachedItem = item;
+  window.cachedPortalId = portalId;
 
-  document.getElementById("employeeName").innerText = item.name;
-
-  showProgress(item);
+  profileResult.innerHTML = `
+    <div class="profileCard" onclick="openPortal()">
+      ${item.name}
+    </div>
+  `;
 });
+
+function openPortal(){
+  searchScreen.style.display = "none";
+  portalScreen.style.display = "block";
+
+  document.getElementById("employeeName").innerText =
+    window.cachedItem.name;
+
+  showProgress(window.cachedItem);
+}
 
 const modal = document.getElementById("modal");
 const submitBtn = document.getElementById("submitBtn");
@@ -32,10 +50,12 @@ submitBtn.onclick = () => modal.style.display = "flex";
 cancelBtn.onclick = () => modal.style.display = "none";
 
 confirmBtn.onclick = async () => {
+
   modal.style.display = "none";
 
   const formData = new FormData();
-  formData.append("portalId", document.getElementById("portalId").value);
+  formData.append("portalId", window.cachedPortalId);
+
   formData.append("physicalExp", document.getElementById("physicalExp").value);
   formData.append("liabilityExp", document.getElementById("liabilityExp").value);
   formData.append("registrationExp", document.getElementById("registrationExp").value);
@@ -46,12 +66,10 @@ confirmBtn.onclick = async () => {
     }
   });
 
- const API = "https://onboarding-portal-hy2o.onrender.com";
-
-const res = await fetch(`${API}/upload`, {
-  method: "POST",
-  body: formData
-});
+  const res = await fetch(`${API}/upload`, {
+    method: "POST",
+    body: formData
+  });
 
   if(res.ok){
     toast.innerText="Documents Uploaded Successfully";
@@ -66,38 +84,30 @@ const res = await fetch(`${API}/upload`, {
 
 function showProgress(item){
 
-  // show name immediately
-  document.getElementById("employeeName").innerText =
-    item.name;
-
-  // THESE are your status columns
   const statusColumns = [
-    "color_mm02nvg7", // SSN Stat
-    "color_mm02f6sk", // PETS Stat
-    "color_mm02w1nr", // Statewide Stat
-    "color_mm02wex8", // I9 Stat
-    "color_mm0282sv", // Physical Stat
-    "color_mm02fvcg", // Liability Stat
-    "color_mm0260zc", // Registration Stat
-    "color_mm02fjyq", // Direct Deposit Stat
-    "color_mm02kpx9", // W2 Stat
-    "color_mm02rh5m", // TSSLD Stat
-    "color_mm02sw49", // Medicaid Stat
-    "color_mm025cqk", // P&P Stat
-    "color_mm02n84j", // 4A Stat
-    "color_mm02tp34", // 4B Stat
-    "color_mm02m91t", // ID Stat
-    "color_mm02mqdj"  // License Stat
+    "color_mm02nvg7",
+    "color_mm02f6sk",
+    "color_mm02w1nr",
+    "color_mm02wex8",
+    "color_mm0282sv",
+    "color_mm02fvcg",
+    "color_mm0260zc",
+    "color_mm02fjyq",
+    "color_mm02kpx9",
+    "color_mm02rh5m",
+    "color_mm02sw49",
+    "color_mm025cqk",
+    "color_mm02n84j",
+    "color_mm02tp34",
+    "color_mm02m91t",
+    "color_mm02mqdj"
   ];
 
   let completed = 0;
 
   item.column_values.forEach(col=>{
     if(statusColumns.includes(col.id)){
-      if(col.text && col.text.toLowerCase().includes("done")){
-        completed++;
-      }
-      if(col.text && col.text.includes("✓")){
+      if(col.text && (col.text.includes("✓") || col.text.toLowerCase().includes("done"))){
         completed++;
       }
     }
@@ -111,11 +121,4 @@ function showProgress(item){
 
   document.getElementById("counts").innerText =
     `${completed} completed • ${total-completed} pending`;
-}
-
-function openPortal(){
-  document.getElementById("searchScreen").style.display = "none";
-  document.getElementById("portalScreen").style.display = "block";
-
-  showProgress(window.cachedItem);
 }
