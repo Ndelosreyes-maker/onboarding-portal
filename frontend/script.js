@@ -5,21 +5,15 @@ const profileResult = document.getElementById("profileResult");
 const portalScreen = document.getElementById("portalScreen");
 const searchScreen = document.getElementById("searchScreen");
 
-document.getElementById("refreshBtn").onclick = async () => {
+const modal = document.getElementById("modal");
+const submitBtn = document.getElementById("submitBtn");
+const confirmBtn = document.getElementById("confirmBtn");
+const cancelBtn = document.getElementById("cancelBtn");
+const toast = document.getElementById("toast");
 
-  const response = await fetch(`${API}/lookup`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ portalId: window.cachedPortalId })
-  });
-
-  const item = await response.json();
-  window.cachedItem = item;
-
-  showProgress(item);
-  updateDocStatuses(item);
-};
-
+/* =========================
+   LOOKUP EMPLOYEE
+========================= */
 
 portalInput.addEventListener("blur", async () => {
 
@@ -57,11 +51,9 @@ function openPortal(){
   updateDocStatuses(window.cachedItem);
 }
 
-const modal = document.getElementById("modal");
-const submitBtn = document.getElementById("submitBtn");
-const confirmBtn = document.getElementById("confirmBtn");
-const cancelBtn = document.getElementById("cancelBtn");
-const toast = document.getElementById("toast");
+/* =========================
+   SUBMIT DOCUMENTS
+========================= */
 
 submitBtn.onclick = () => modal.style.display = "flex";
 cancelBtn.onclick = () => modal.style.display = "none";
@@ -73,9 +65,9 @@ confirmBtn.onclick = async () => {
   const formData = new FormData();
   formData.append("portalId", window.cachedPortalId);
 
-  formData.append("physicalExp", document.getElementById("physicalExp").value);
-  formData.append("liabilityExp", document.getElementById("liabilityExp").value);
-  formData.append("registrationExp", document.getElementById("registrationExp").value);
+  formData.append("physicalExp", document.getElementById("physicalExp")?.value || "");
+  formData.append("liabilityExp", document.getElementById("liabilityExp")?.value || "");
+  formData.append("registrationExp", document.getElementById("registrationExp")?.value || "");
 
   document.querySelectorAll("input[type=file]").forEach(input=>{
     if(input.files[0]){
@@ -89,15 +81,36 @@ confirmBtn.onclick = async () => {
   });
 
   if(res.ok){
-    toast.innerText="Documents Uploaded Successfully";
-    toast.style.display="block";
+
+    toast.innerText = "Uploaded ✓";
+    toast.style.background = "#22c55e";
+    toast.style.display = "block";
     setTimeout(()=>toast.style.display="none",3000);
+
+    // 🔥 REFRESH DATA FROM MONDAY
+    const response = await fetch(`${API}/lookup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ portalId: window.cachedPortalId })
+    });
+
+    const item = await response.json();
+    window.cachedItem = item;
+
+    showProgress(item);
+    updateDocStatuses(item);
+
   } else {
+
     toast.innerText="Upload Failed";
     toast.style.background="#ef4444";
     toast.style.display="block";
   }
 };
+
+/* =========================
+   PROGRESS BAR
+========================= */
 
 function showProgress(item){
 
@@ -124,7 +137,9 @@ function showProgress(item){
 
   item.column_values.forEach(col=>{
     if(statusColumns.includes(col.id)){
-      if(col.text && (col.text.includes("✓") || col.text.toLowerCase().includes("done"))){
+      if(col.text && 
+        (col.text.includes("✓") || 
+         col.text.toLowerCase().includes("done"))){
         completed++;
       }
     }
@@ -140,13 +155,19 @@ function showProgress(item){
     `${completed} completed • ${total-completed} pending`;
 }
 
+/* =========================
+   DOCUMENT STATUS UI
+========================= */
+
 function updateDocStatuses(item){
 
   const rows = Array.from(document.querySelectorAll(".docRow"));
-
   let completed = 0;
 
   rows.forEach(row=>{
+
+    row.classList.remove("completed","pending");
+
     const colId = row.dataset.col;
     const statusEl = row.querySelector(".status");
     const fileInput = row.querySelector("input[type=file]");
@@ -160,24 +181,28 @@ function updateDocStatuses(item){
        column.text.toLowerCase().includes("done"));
 
     if(done){
+
       completed++;
 
       statusEl.innerText = "✓ Uploaded";
       statusEl.style.color = "#22c55e";
 
       if(fileInput) fileInput.style.display = "none";
+
       row.classList.add("completed");
 
     }else{
+
       statusEl.innerText = "Pending";
       statusEl.style.color = "#f59e0b";
 
       if(fileInput) fileInput.style.display = "inline-block";
+
       row.classList.add("pending");
     }
   });
 
-  // sort pending to top
+  // Sort pending first
   const container = document.getElementById("docList");
   const sorted = rows.sort((a,b)=>{
     return a.classList.contains("completed") -
@@ -186,7 +211,7 @@ function updateDocStatuses(item){
 
   sorted.forEach(r=>container.appendChild(r));
 
-  // banner if all done
+  // If everything done
   if(completed === rows.length){
     showAllDoneBanner();
   }
