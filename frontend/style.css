@@ -2,14 +2,14 @@ body{
   margin:0;
   font-family:Inter,Arial;
   background:#0f172a;
-  color:white;
+  color:#e5e7eb;
 }
 
 .topbar{
   background:linear-gradient(135deg,#1e293b,#020617);
-  border-bottom:1px solid #334155;
+  padding:24px;
   text-align:center;
-  padding:22px;
+  border-bottom:1px solid #334155;
 }
 
 .container{
@@ -21,15 +21,36 @@ body{
 .card{
   background:#1e293b;
   border-radius:16px;
-  padding:22px;
+  padding:24px;
   margin-bottom:22px;
+}
+
+.searchRow{
+  display:flex;
+  gap:10px;
+}
+
+input{
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #334155;
+  background:#020617;
+  color:white;
+}
+
+button{
+  padding:10px 16px;
+  border-radius:8px;
+  border:none;
+  background:#3b82f6;
+  color:white;
+  cursor:pointer;
 }
 
 .profile-header{
   display:flex;
   flex-direction:column;
   align-items:center;
-  text-align:center;
 }
 
 .profile-actions{
@@ -46,25 +67,14 @@ body{
 .docCard{
   background:#1e293b;
   border:1px solid #334155;
-  border-radius:14px;
+  border-radius:12px;
   padding:16px;
 }
 
 .docHeader{
   display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:10px;
-}
-
-.docIcon{
-  width:36px;
-  height:36px;
-  border-radius:10px;
-  background:#f97316;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  justify-content:space-between;
+  margin-bottom:8px;
 }
 
 .statusBadge{
@@ -73,15 +83,16 @@ body{
   border-radius:20px;
 }
 
-.statusBadge.pending{background:#1f2937;color:#fbbf24;}
-.statusBadge.done{background:#064e3b;color:#34d399;}
+.pending{background:#1f2937;color:#fbbf24;}
+.done{background:#064e3b;color:#34d399;}
 
 .uploadBox{
   border:2px dashed #334155;
   border-radius:10px;
-  padding:14px;
+  padding:12px;
   cursor:pointer;
 }
+
 .uploadBox input{display:none;}
 
 .expDate{
@@ -89,32 +100,28 @@ body{
   margin-bottom:10px;
   padding:8px;
   border-radius:8px;
-  border:1px solid #334155;
   background:#020617;
+  border:1px solid #334155;
   color:white;
 }
 
 .submit{
   width:100%;
-  padding:14px;
   margin-top:20px;
+  padding:14px;
   border-radius:10px;
   background:#3b82f6;
-  border:none;
-  color:white;
 }
 
-.progress-wrapper{height:10px;background:#020617;border-radius:20px;margin:12px 0;}
-.progress-bar{height:10px;background:#22c55e;width:0%;}
-
-#toast{
-  position:fixed;
-  top:20px;
-  right:20px;
+.progress-wrapper{
+  height:10px;
+  background:#020617;
+  border-radius:20px;
+}
+.progress-bar{
+  height:10px;
   background:#22c55e;
-  padding:12px 16px;
-  border-radius:8px;
-  display:none;
+  width:0%;
 }
 
 .modal{
