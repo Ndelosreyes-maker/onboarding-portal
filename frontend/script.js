@@ -15,18 +15,22 @@ const toast = document.getElementById("toast");
    LOOKUP EMPLOYEE
 ========================= */
 
-portalInput.addEventListener("blur", async () => {
+document.getElementById("findBtn").onclick = lookup;
+portalInput.addEventListener("keydown", e=>{
+  if(e.key==="Enter") lookup();
+});
 
+async function lookup(){
   const portalId = portalInput.value.trim();
-  if (!portalId) return;
+  if(!portalId) return;
 
-  const response = await fetch(`${API}/lookup`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ portalId })
+  const response = await fetch(`${API}/lookup`,{
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body:JSON.stringify({ portalId })
   });
 
-  if (!response.ok) return;
+  if(!response.ok) return;
 
   const item = await response.json();
 
@@ -38,7 +42,7 @@ portalInput.addEventListener("blur", async () => {
       ${item.name}
     </div>
   `;
-});
+}
 
 function openPortal(){
   searchScreen.style.display = "none";
