@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<title>Employee Document Portal</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Legendary Therapy Document Portal</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -43,101 +43,102 @@
     <!-- PORTAL SCREEN -->
     <div id="portalScreen" style="display:none;">
 
+      <!-- PROFILE HEADER -->
       <div class="card profile-header">
         <div class="icon big">👤</div>
         <h2 id="employeeName"></h2>
 
         <div class="profile-actions">
-          <button id="refreshBtn">Refresh</button>
+          <button id="refreshBtn" onclick="lookup()">Refresh</button>
           <button onclick="location.reload()">Change Employee</button>
         </div>
       </div>
 
-      <!-- COUNTS -->
+      <!-- PROGRESS -->
       <div class="counts" id="counts"></div>
 
-      <!-- PROGRESS -->
       <div class="progress-wrapper">
         <div class="progress-bar" id="progressBar"></div>
       </div>
 
-      <!-- DOCUMENT LIST -->
-     <div id="docList" class="doc-grid">
+      <!-- DOCUMENT CARDS -->
+      <div id="docList" class="doc-grid">
 
-  <!-- SSN -->
-  <div class="docCard" data-col="color_mm02nvg7">
-    <div class="docHeader">
-      <div class="docIcon">📄</div>
-      <div class="docTitle">SSN</div>
-      <div class="statusBadge pending">Pending</div>
-    </div>
+        <!-- SSN -->
+        <div class="docCard" data-col="color_mm02nvg7">
+          <div class="docHeader">
+            <div class="docIcon">📄</div>
+            <div class="docTitle">SSN</div>
+            <div class="statusBadge pending">Pending</div>
+          </div>
 
-    <label class="uploadBox">
-      <input type="file" name="file_mm027d47">
-      <div class="uploadInner">
-        <div class="uploadIcon">⬆</div>
-        <div>Drop file or click to upload</div>
-        <small>PDF, DOC, JPG, PNG</small>
+          <div class="uploadBox">
+            <input type="file" name="file_mm027d47" class="fileInput">
+            <div class="uploadInner">
+              <div class="uploadIcon">⬆</div>
+              <div>Drop file or click to upload</div>
+              <small>PDF, DOC, JPG, PNG</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- PETS -->
+        <div class="docCard" data-col="color_mm02f6sk">
+          <div class="docHeader">
+            <div class="docIcon">📄</div>
+            <div class="docTitle">PETS</div>
+            <div class="statusBadge pending">Pending</div>
+          </div>
+
+          <div class="uploadBox">
+            <input type="file" name="file_mm02dgx5" class="fileInput">
+            <div class="uploadInner">
+              <div class="uploadIcon">⬆</div>
+              <div>Drop file or click to upload</div>
+              <small>PDF, DOC, JPG, PNG</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Statewide -->
+        <div class="docCard" data-col="color_mm02w1nr">
+          <div class="docHeader">
+            <div class="docIcon">📄</div>
+            <div class="docTitle">Statewide</div>
+            <div class="statusBadge pending">Pending</div>
+          </div>
+
+          <div class="uploadBox">
+            <input type="file" name="file_mm02vxj1" class="fileInput">
+            <div class="uploadInner">
+              <div class="uploadIcon">⬆</div>
+              <div>Drop file or click to upload</div>
+              <small>PDF, DOC, JPG, PNG</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- I-9 -->
+        <div class="docCard" data-col="color_mm02wex8">
+          <div class="docHeader">
+            <div class="docIcon">📄</div>
+            <div class="docTitle">I-9</div>
+            <div class="statusBadge pending">Pending</div>
+          </div>
+
+          <div class="uploadBox">
+            <input type="file" name="file_mm02wc6g" class="fileInput">
+            <div class="uploadInner">
+              <div class="uploadIcon">⬆</div>
+              <div>Drop file or click to upload</div>
+              <small>PDF, DOC, JPG, PNG</small>
+            </div>
+          </div>
+        </div>
+
       </div>
-    </label>
-  </div>
 
-  <!-- PETS -->
-  <div class="docCard" data-col="color_mm02f6sk">
-    <div class="docHeader">
-      <div class="docIcon">📄</div>
-      <div class="docTitle">PETS</div>
-      <div class="statusBadge pending">Pending</div>
-    </div>
-
-    <label class="uploadBox">
-      <input type="file" name="file_mm02dgx5">
-      <div class="uploadInner">
-        <div class="uploadIcon">⬆</div>
-        <div>Drop file or click to upload</div>
-        <small>PDF, DOC, JPG, PNG</small>
-      </div>
-    </label>
-  </div>
-
-  <!-- Statewide -->
-  <div class="docCard" data-col="color_mm02w1nr">
-    <div class="docHeader">
-      <div class="docIcon">📄</div>
-      <div class="docTitle">Statewide</div>
-      <div class="statusBadge pending">Pending</div>
-    </div>
-
-    <label class="uploadBox">
-      <input type="file" name="file_mm02vxj1">
-      <div class="uploadInner">
-        <div class="uploadIcon">⬆</div>
-        <div>Drop file or click to upload</div>
-        <small>PDF, DOC, JPG, PNG</small>
-      </div>
-    </label>
-  </div>
-
-  <!-- I9 -->
-  <div class="docCard" data-col="color_mm02wex8">
-    <div class="docHeader">
-      <div class="docIcon">📄</div>
-      <div class="docTitle">I-9</div>
-      <div class="statusBadge pending">Pending</div>
-    </div>
-
-    <label class="uploadBox">
-      <input type="file" name="file_mm02wc6g">
-      <div class="uploadInner">
-        <div class="uploadIcon">⬆</div>
-        <div>Drop file or click to upload</div>
-        <small>PDF, DOC, JPG, PNG</small>
-      </div>
-    </label>
-  </div>
-
-</div>
-
+      <!-- SUBMIT -->
       <button id="submitBtn" class="submit">Submit Documents</button>
 
     </div>
@@ -145,6 +146,28 @@
   </div>
 
 </div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <p>Submit documents?</p>
+    <button id="confirmBtn">Yes</button>
+    <button id="cancelBtn">Cancel</button>
+  </div>
+</div>
+
 <script src="script.js"></script>
+
+<script>
+  // Make upload boxes clickable
+  document.querySelectorAll(".uploadBox").forEach(box=>{
+    const input = box.querySelector(".fileInput");
+    box.addEventListener("click", ()=> input.click());
+  });
+</script>
+
 </body>
 </html>
