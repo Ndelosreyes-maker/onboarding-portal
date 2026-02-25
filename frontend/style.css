@@ -6,159 +6,139 @@ body{
 }
 
 .topbar{
-  background:linear-gradient(135deg,#1e293b,#020617);
-  padding:28px;
+  background:#111827;
+  padding:20px;
   text-align:center;
   border-bottom:1px solid #334155;
 }
 
 .container{
-  max-width:1100px;
+  max-width:900px;
   margin:auto;
   padding:40px 20px;
 }
 
-.card{
+/* SEARCH */
+.searchCard{
   background:#1e293b;
-  border-radius:16px;
-  padding:28px;
-  margin-bottom:28px;
+  padding:24px;
+  border-radius:14px;
+  max-width:600px;
+  margin:auto;
 }
 
 .searchRow{
   display:flex;
-  gap:14px;
-  margin-top:14px;
+  gap:10px;
+  margin-top:12px;
 }
 
 .searchRow input{
   flex:1;
-  padding:14px;
-  border-radius:10px;
+  padding:12px;
+  border-radius:8px;
   border:1px solid #334155;
   background:#020617;
   color:white;
-  font-size:15px;
 }
 
 .searchRow button{
-  padding:14px 22px;
-  border-radius:10px;
+  padding:12px 18px;
+  border-radius:8px;
   background:#3b82f6;
   border:none;
   color:white;
-  font-weight:600;
 }
 
-.profile-header{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+/* PROFILE */
+.profileBar{
   text-align:center;
-  gap:16px;
+  margin-bottom:20px;
 }
 
-.profile-name{
-  font-size:28px;
+.profileName{
+  font-size:26px;
   font-weight:700;
+  margin-bottom:10px;
 }
 
-.profile-actions{
+.profileBtns{
   display:flex;
-  gap:14px;
+  justify-content:center;
+  gap:10px;
 }
 
-.profile-actions button{
-  padding:10px 20px;
-  border-radius:10px;
+.profileBtns button{
+  padding:10px 16px;
+  border-radius:8px;
   background:#2563eb;
   border:none;
   color:white;
-  font-weight:600;
 }
 
-.doc-grid{
+/* GRID */
+.docGrid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:18px;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
 }
 
 .docCard{
   background:#1e293b;
+  padding:16px;
+  border-radius:12px;
   border:1px solid #334155;
-  border-radius:14px;
-  padding:18px;
 }
 
 .docHeader{
   display:flex;
   justify-content:space-between;
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
 
-.statusBadge{
+.status{
   font-size:12px;
-  padding:4px 10px;
-  border-radius:20px;
+  color:#fbbf24;
 }
 
-.pending{background:#1f2937;color:#fbbf24;}
-.done{background:#064e3b;color:#34d399;}
-
-.uploadBox{
-  border:2px dashed #334155;
-  border-radius:12px;
-  padding:16px;
-  cursor:pointer;
-}
-
-.uploadBox input{display:none;}
-
-.expDate{
+.expInput{
   width:100%;
-  margin-bottom:12px;
-  padding:10px;
-  border-radius:10px;
+  margin-bottom:10px;
+  padding:8px;
+  border-radius:8px;
   background:#020617;
   border:1px solid #334155;
   color:white;
 }
 
-.submit{
+.uploadBox{
+  border:2px dashed #334155;
+  padding:14px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.uploadBox input{display:none;}
+
+.submitBtn{
   width:100%;
-  margin-top:26px;
-  padding:16px;
-  border-radius:12px;
+  margin-top:20px;
+  padding:14px;
+  border-radius:10px;
   background:#3b82f6;
   border:none;
   color:white;
-  font-weight:600;
 }
 
 .progress-wrapper{
-  height:10px;
+  height:8px;
   background:#020617;
   border-radius:20px;
-  margin:16px 0;
+  margin:10px 0;
 }
 
 .progress-bar{
-  height:10px;
+  height:8px;
   background:#22c55e;
   width:0%;
-}
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.6);
-  justify-content:center;
-  align-items:center;
-}
-
-.modal-content{
-  background:#1e293b;
-  padding:24px;
-  border-radius:14px;
 }
