@@ -51,7 +51,7 @@ async function lookup(){
     `;
 
   }catch(err){
-    profileResult.innerHTML = "Server waking up...";
+    profileResult.innerHTML = "Waking server...";
   }
 }
 
@@ -95,7 +95,7 @@ confirmBtn.onclick = async () => {
 
     showToast("Uploaded ✓", "#22c55e");
 
-    // refresh data
+    // refresh Monday data
     const response = await fetch(`${API}/lookup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -186,7 +186,8 @@ function updateDocStatuses(item){
 
     const colId = card.dataset.col;
     const badge = card.querySelector(".statusBadge");
-    const fileInput = card.querySelector("input[type=file]");
+    const fileInput = card.querySelector(".fileInput");
+    const uploadBox = card.querySelector(".uploadBox");
 
     const column = item.column_values.find(c=>c.id===colId);
     if(!column) return;
@@ -204,14 +205,15 @@ function updateDocStatuses(item){
       badge.className = "statusBadge done";
 
       card.classList.add("completed");
-      if(fileInput) fileInput.style.display="none";
+
+      if(uploadBox) uploadBox.style.display = "none";
 
     }else{
 
       badge.innerText = "Pending";
       badge.className = "statusBadge pending";
 
-      if(fileInput) fileInput.style.display="block";
+      if(uploadBox) uploadBox.style.display = "block";
     }
   });
 
@@ -243,6 +245,17 @@ function showAllDoneBanner(){
   banner.style.borderRadius = "8px";
   banner.style.textAlign = "center";
 
-  document.querySelector(".card")
+  document.querySelector(".profile-header")
     .prepend(banner);
 }
+
+/* =========================
+   CLICKABLE UPLOAD BOXES
+========================= */
+
+document.querySelectorAll(".uploadBox").forEach(box=>{
+  const input = box.querySelector(".fileInput");
+  box.addEventListener("click", ()=>{
+    if(input) input.click();
+  });
+});
