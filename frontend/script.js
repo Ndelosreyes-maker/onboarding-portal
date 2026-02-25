@@ -186,16 +186,26 @@ function updateDocStatuses(item){
 
     const colId = card.dataset.col;
     const badge = card.querySelector(".statusBadge");
-    const fileInput = card.querySelector(".fileInput");
     const uploadBox = card.querySelector(".uploadBox");
 
     const column = item.column_values.find(c=>c.id===colId);
     if(!column) return;
 
-    const done =
-      column.text &&
-      (column.text.includes("✓") ||
-       column.text.toLowerCase().includes("done"));
+    // 🔥 FIXED DETECTION
+    let done = false;
+
+    // File columns
+    if(column.value && column.value !== null){
+      done = true;
+    }
+
+    // Status columns
+    if(column.text){
+      const t = column.text.toLowerCase();
+      if(t.includes("✓") || t.includes("done")){
+        done = true;
+      }
+    }
 
     if(done){
 
@@ -225,6 +235,12 @@ function updateDocStatuses(item){
   if(completed === total){
     showAllDoneBanner();
   }
+
+  // 🔁 rebind upload clicks
+  document.querySelectorAll(".uploadBox").forEach(box=>{
+    const input = box.querySelector(".fileInput");
+    box.onclick = ()=> input && input.click();
+  });
 }
 
 /* =========================
@@ -248,14 +264,3 @@ function showAllDoneBanner(){
   document.querySelector(".profile-header")
     .prepend(banner);
 }
-
-/* =========================
-   CLICKABLE UPLOAD BOXES
-========================= */
-
-document.querySelectorAll(".uploadBox").forEach(box=>{
-  const input = box.querySelector(".fileInput");
-  box.addEventListener("click", ()=>{
-    if(input) input.click();
-  });
-});
