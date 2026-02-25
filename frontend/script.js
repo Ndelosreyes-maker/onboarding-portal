@@ -165,16 +165,16 @@ function showProgress(item){
 
 function updateDocStatuses(item){
 
-  const rows = Array.from(document.querySelectorAll(".docRow"));
+  const cards = Array.from(document.querySelectorAll(".docCard"));
   let completed = 0;
 
-  rows.forEach(row=>{
+  cards.forEach(card=>{
 
-    row.classList.remove("completed","pending");
+    card.classList.remove("completed");
 
-    const colId = row.dataset.col;
-    const statusEl = row.querySelector(".status");
-    const fileInput = row.querySelector("input[type=file]");
+    const colId = card.dataset.col;
+    const badge = card.querySelector(".statusBadge");
+    const fileInput = card.querySelector("input[type=file]");
 
     const column = item.column_values.find(c=>c.id===colId);
     if(!column) return;
@@ -188,23 +188,29 @@ function updateDocStatuses(item){
 
       completed++;
 
-      statusEl.innerText = "✓ Uploaded";
-      statusEl.style.color = "#22c55e";
+      badge.innerText = "Uploaded";
+      badge.className = "statusBadge done";
 
-      if(fileInput) fileInput.style.display = "none";
-
-      row.classList.add("completed");
+      card.classList.add("completed");
+      if(fileInput) fileInput.style.display="none";
 
     }else{
 
-      statusEl.innerText = "Pending";
-      statusEl.style.color = "#f59e0b";
+      badge.innerText = "Pending";
+      badge.className = "statusBadge pending";
 
-      if(fileInput) fileInput.style.display = "inline-block";
-
-      row.classList.add("pending");
+      if(fileInput) fileInput.style.display="block";
     }
   });
+
+  const total = cards.length;
+  document.getElementById("counts").innerText =
+    `${completed} completed • ${total-completed} pending`;
+
+  if(completed===total){
+    showAllDoneBanner();
+  }
+}
 
   // Sort pending first
   const container = document.getElementById("docList");
