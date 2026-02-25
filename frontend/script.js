@@ -225,7 +225,7 @@ function updateDocStatuses(item){
   if(completed === rows.length){
     showAllDoneBanner();
   }
-}
+}}
 
 function showAllDoneBanner(){
 
