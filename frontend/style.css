@@ -9,7 +9,6 @@ body{
   background:#111827;
   padding:20px;
   text-align:center;
-  border-bottom:1px solid #334155;
 }
 
 .container{
@@ -22,15 +21,15 @@ body{
 .searchCard{
   background:#1e293b;
   padding:24px;
-  border-radius:14px;
-  max-width:600px;
+  border-radius:12px;
+  max-width:520px;
   margin:auto;
 }
 
 .searchRow{
   display:flex;
   gap:10px;
-  margin-top:12px;
+  margin-top:10px;
 }
 
 .searchRow input{
@@ -56,24 +55,16 @@ body{
   margin-bottom:20px;
 }
 
-.profileName{
+.employeeName{
   font-size:26px;
   font-weight:700;
   margin-bottom:10px;
 }
 
-.profileBtns{
+.profileActions{
   display:flex;
   justify-content:center;
   gap:10px;
-}
-
-.profileBtns button{
-  padding:10px 16px;
-  border-radius:8px;
-  background:#2563eb;
-  border:none;
-  color:white;
 }
 
 /* GRID */
@@ -94,11 +85,6 @@ body{
   display:flex;
   justify-content:space-between;
   margin-bottom:10px;
-}
-
-.status{
-  font-size:12px;
-  color:#fbbf24;
 }
 
 .expInput{
@@ -130,15 +116,18 @@ body{
   color:white;
 }
 
-.progress-wrapper{
-  height:8px;
-  background:#020617;
-  border-radius:20px;
-  margin:10px 0;
+/* MODAL FIX */
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  justify-content:center;
+  align-items:center;
 }
 
-.progress-bar{
-  height:8px;
-  background:#22c55e;
-  width:0%;
+.modalContent{
+  background:#1e293b;
+  padding:20px;
+  border-radius:12px;
 }
