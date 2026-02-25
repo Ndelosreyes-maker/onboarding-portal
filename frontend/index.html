@@ -8,15 +8,15 @@
 <body>
 
 <header class="topbar">
-  <h1>Legendary Therapy Document Portal</h1>
-  <p>Secure Employee Onboarding</p>
+  <h1>Legendary Therapy Portal</h1>
 </header>
 
 <div class="container">
 
 <!-- SEARCH -->
 <div id="searchScreen">
-  <div class="card search-card">
+
+  <div class="searchCard">
     <h2>Find Your Profile</h2>
 
     <div class="searchRow">
@@ -26,15 +26,16 @@
 
     <div id="profileResult"></div>
   </div>
+
 </div>
 
 <!-- PORTAL -->
 <div id="portalScreen" style="display:none;">
 
-  <div class="card profile-header">
-    <div class="profile-name" id="employeeName"></div>
+  <div class="profileBar">
+    <div class="profileName" id="employeeName"></div>
 
-    <div class="profile-actions">
+    <div class="profileBtns">
       <button id="refreshBtn">Refresh</button>
       <button onclick="location.reload()">Change Employee</button>
     </div>
@@ -46,77 +47,18 @@
     <div class="progress-bar" id="progressBar"></div>
   </div>
 
-  <div id="docList" class="doc-grid">
-
-    <!-- Resume -->
-    <div class="docCard" data-col="color_mm01pv4x">
-      <div class="docHeader">
-        <span>Resume</span>
-        <span class="statusBadge pending">Pending</span>
-      </div>
-      <div class="uploadBox">
-        <input type="file" name="file_mm01pv4x" class="fileInput">
-        <div class="uploadInner">Upload Resume</div>
-      </div>
-    </div>
-
-    <!-- Signed Contract -->
-    <div class="docCard" data-col="color_mm02syqk">
-      <div class="docHeader">
-        <span>Signed Contract</span>
-        <span class="statusBadge pending">Pending</span>
-      </div>
-      <div class="uploadBox">
-        <input type="file" name="file_mm02syqk" class="fileInput">
-        <div class="uploadInner">Upload Contract</div>
-      </div>
-    </div>
-
-    <!-- SSN -->
-    <div class="docCard" data-col="color_mm027d47">
-      <div class="docHeader">
-        <span>SSN</span>
-        <span class="statusBadge pending">Pending</span>
-      </div>
-      <div class="uploadBox">
-        <input type="file" name="file_mm027d47" class="fileInput">
-        <div class="uploadInner">Upload SSN</div>
-      </div>
-    </div>
-
-    <!-- PETS -->
-    <div class="docCard" data-col="color_mm02dgx5">
-      <div class="docHeader">
-        <span>PETS</span>
-        <span class="statusBadge pending">Pending</span>
-      </div>
-      <div class="uploadBox">
-        <input type="file" name="file_mm02dgx5" class="fileInput">
-        <div class="uploadInner">Upload PETS</div>
-      </div>
-    </div>
-
-    <!-- Statewide -->
-    <div class="docCard" data-col="color_mm02vxj1">
-      <div class="docHeader">
-        <span>Statewide</span>
-        <span class="statusBadge pending">Pending</span>
-      </div>
-      <div class="uploadBox">
-        <input type="file" name="file_mm02vxj1" class="fileInput">
-        <div class="uploadInner">Upload Statewide</div>
-      </div>
-    </div>
+  <div id="docList" class="docGrid">
 
     <!-- I-9 -->
     <div class="docCard" data-col="color_mm02wc6g">
       <div class="docHeader">
         <span>I-9</span>
-        <span class="statusBadge pending">Pending</span>
+        <span class="status pending">Pending</span>
       </div>
+
       <div class="uploadBox">
         <input type="file" name="file_mm02wc6g" class="fileInput">
-        <div class="uploadInner">Upload I-9</div>
+        <div class="uploadText">Upload I-9</div>
       </div>
     </div>
 
@@ -124,12 +66,14 @@
     <div class="docCard" data-col="color_mm02tfs6">
       <div class="docHeader">
         <span>Physical</span>
-        <span class="statusBadge pending">Pending</span>
+        <span class="status pending">Pending</span>
       </div>
-      <input type="date" id="physicalExp" class="expDate">
+
+      <input type="date" id="physicalExp" class="expInput">
+
       <div class="uploadBox">
         <input type="file" name="file_mm02tfs6" class="fileInput">
-        <div class="uploadInner">Upload Physical</div>
+        <div class="uploadText">Upload Physical</div>
       </div>
     </div>
 
@@ -137,12 +81,14 @@
     <div class="docCard" data-col="color_mm02q4hg">
       <div class="docHeader">
         <span>Liability Insurance</span>
-        <span class="statusBadge pending">Pending</span>
+        <span class="status pending">Pending</span>
       </div>
-      <input type="date" id="liabilityExp" class="expDate">
+
+      <input type="date" id="liabilityExp" class="expInput">
+
       <div class="uploadBox">
         <input type="file" name="file_mm02q4hg" class="fileInput">
-        <div class="uploadInner">Upload Liability</div>
+        <div class="uploadText">Upload Liability</div>
       </div>
     </div>
 
@@ -150,18 +96,20 @@
     <div class="docCard" data-col="color_mm02xndg">
       <div class="docHeader">
         <span>Registration</span>
-        <span class="statusBadge pending">Pending</span>
+        <span class="status pending">Pending</span>
       </div>
-      <input type="date" id="registrationExp" class="expDate">
+
+      <input type="date" id="registrationExp" class="expInput">
+
       <div class="uploadBox">
         <input type="file" name="file_mm02xndg" class="fileInput">
-        <div class="uploadInner">Upload Registration</div>
+        <div class="uploadText">Upload Registration</div>
       </div>
     </div>
 
   </div>
 
-  <button id="submitBtn" class="submit">Submit Documents</button>
+  <button id="submitBtn" class="submitBtn">Submit Documents</button>
 
 </div>
 </div>
@@ -169,7 +117,7 @@
 <div id="toast"></div>
 
 <div id="modal" class="modal">
-  <div class="modal-content">
+  <div class="modalBox">
     <p>Submit documents?</p>
     <button id="confirmBtn">Yes</button>
     <button id="cancelBtn">Cancel</button>
