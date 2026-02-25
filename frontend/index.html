@@ -8,14 +8,13 @@
 <body>
 
 <header class="topbar">
-  <h1>Legendary Therapy Portal</h1>
+  <h1>Legendary Therapy Document Portal</h1>
 </header>
 
 <div class="container">
 
 <!-- SEARCH -->
 <div id="searchScreen">
-
   <div class="searchCard">
     <h2>Find Your Profile</h2>
 
@@ -26,16 +25,16 @@
 
     <div id="profileResult"></div>
   </div>
-
 </div>
 
 <!-- PORTAL -->
 <div id="portalScreen" style="display:none;">
 
+  <!-- PROFILE HEADER -->
   <div class="profileBar">
-    <div class="profileName" id="employeeName"></div>
+    <div id="employeeName" class="employeeName"></div>
 
-    <div class="profileBtns">
+    <div class="profileActions">
       <button id="refreshBtn">Refresh</button>
       <button onclick="location.reload()">Change Employee</button>
     </div>
@@ -47,15 +46,15 @@
     <div class="progress-bar" id="progressBar"></div>
   </div>
 
+  <!-- DOCUMENT GRID -->
   <div id="docList" class="docGrid">
 
-    <!-- I-9 -->
+    <!-- I9 -->
     <div class="docCard" data-col="color_mm02wc6g">
       <div class="docHeader">
         <span>I-9</span>
-        <span class="status pending">Pending</span>
+        <span class="statusBadge pending">Pending</span>
       </div>
-
       <div class="uploadBox">
         <input type="file" name="file_mm02wc6g" class="fileInput">
         <div class="uploadText">Upload I-9</div>
@@ -66,11 +65,9 @@
     <div class="docCard" data-col="color_mm02tfs6">
       <div class="docHeader">
         <span>Physical</span>
-        <span class="status pending">Pending</span>
+        <span class="statusBadge pending">Pending</span>
       </div>
-
       <input type="date" id="physicalExp" class="expInput">
-
       <div class="uploadBox">
         <input type="file" name="file_mm02tfs6" class="fileInput">
         <div class="uploadText">Upload Physical</div>
@@ -81,11 +78,9 @@
     <div class="docCard" data-col="color_mm02q4hg">
       <div class="docHeader">
         <span>Liability Insurance</span>
-        <span class="status pending">Pending</span>
+        <span class="statusBadge pending">Pending</span>
       </div>
-
       <input type="date" id="liabilityExp" class="expInput">
-
       <div class="uploadBox">
         <input type="file" name="file_mm02q4hg" class="fileInput">
         <div class="uploadText">Upload Liability</div>
@@ -96,14 +91,36 @@
     <div class="docCard" data-col="color_mm02xndg">
       <div class="docHeader">
         <span>Registration</span>
-        <span class="status pending">Pending</span>
+        <span class="statusBadge pending">Pending</span>
       </div>
-
       <input type="date" id="registrationExp" class="expInput">
-
       <div class="uploadBox">
         <input type="file" name="file_mm02xndg" class="fileInput">
         <div class="uploadText">Upload Registration</div>
+      </div>
+    </div>
+
+    <!-- Resume -->
+    <div class="docCard" data-col="color_mm01pv4x">
+      <div class="docHeader">
+        <span>Resume</span>
+        <span class="statusBadge pending">Pending</span>
+      </div>
+      <div class="uploadBox">
+        <input type="file" name="file_mm01pv4x" class="fileInput">
+        <div class="uploadText">Upload Resume</div>
+      </div>
+    </div>
+
+    <!-- Contract -->
+    <div class="docCard" data-col="color_mm02syqk">
+      <div class="docHeader">
+        <span>Signed Contract</span>
+        <span class="statusBadge pending">Pending</span>
+      </div>
+      <div class="uploadBox">
+        <input type="file" name="file_mm02syqk" class="fileInput">
+        <div class="uploadText">Upload Contract</div>
       </div>
     </div>
 
@@ -117,7 +134,7 @@
 <div id="toast"></div>
 
 <div id="modal" class="modal">
-  <div class="modalBox">
+  <div class="modalContent">
     <p>Submit documents?</p>
     <button id="confirmBtn">Yes</button>
     <button id="cancelBtn">Cancel</button>
