@@ -6,117 +6,148 @@ body{
 }
 
 .topbar{
-  background:#111827;
-  padding:20px;
+  background:linear-gradient(135deg,#1e293b,#020617);
+  padding:28px;
   text-align:center;
+  border-bottom:1px solid #334155;
 }
 
 .container{
-  max-width:900px;
+  max-width:1100px;
   margin:auto;
   padding:40px 20px;
 }
 
-/* SEARCH */
-.searchCard{
+.card{
   background:#1e293b;
-  padding:24px;
-  border-radius:12px;
-  max-width:520px;
-  margin:auto;
+  border-radius:16px;
+  padding:28px;
+  margin-bottom:28px;
 }
 
 .searchRow{
   display:flex;
-  gap:10px;
-  margin-top:10px;
+  gap:14px;
+  margin-top:14px;
 }
 
 .searchRow input{
   flex:1;
-  padding:12px;
-  border-radius:8px;
+  padding:14px;
+  border-radius:10px;
   border:1px solid #334155;
   background:#020617;
   color:white;
+  font-size:15px;
 }
 
 .searchRow button{
-  padding:12px 18px;
-  border-radius:8px;
+  padding:14px 22px;
+  border-radius:10px;
   background:#3b82f6;
   border:none;
   color:white;
+  font-weight:600;
 }
 
-/* PROFILE */
-.profileBar{
-  text-align:center;
-  margin-bottom:20px;
-}
-
-.employeeName{
-  font-size:26px;
-  font-weight:700;
-  margin-bottom:10px;
-}
-
-.profileActions{
+.profile-header{
   display:flex;
-  justify-content:center;
-  gap:10px;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:16px;
 }
 
-/* GRID */
-.docGrid{
+.profile-name{
+  font-size:28px;
+  font-weight:700;
+}
+
+.profile-actions{
+  display:flex;
+  gap:14px;
+}
+
+.profile-actions button{
+  padding:10px 20px;
+  border-radius:10px;
+  background:#2563eb;
+  border:none;
+  color:white;
+  font-weight:600;
+}
+
+.doc-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
 }
 
 .docCard{
   background:#1e293b;
-  padding:16px;
-  border-radius:12px;
   border:1px solid #334155;
+  border-radius:14px;
+  padding:18px;
 }
 
 .docHeader{
   display:flex;
   justify-content:space-between;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
-.expInput{
-  width:100%;
-  margin-bottom:10px;
-  padding:8px;
-  border-radius:8px;
-  background:#020617;
-  border:1px solid #334155;
-  color:white;
+.statusBadge{
+  font-size:12px;
+  padding:4px 10px;
+  border-radius:20px;
 }
+
+.pending{background:#1f2937;color:#fbbf24;}
+.done{background:#064e3b;color:#34d399;}
 
 .uploadBox{
   border:2px dashed #334155;
-  padding:14px;
-  border-radius:10px;
+  border-radius:12px;
+  padding:16px;
   cursor:pointer;
 }
 
 .uploadBox input{display:none;}
 
-.submitBtn{
+.expDate{
   width:100%;
-  margin-top:20px;
-  padding:14px;
+  margin-bottom:12px;
+  padding:10px;
   border-radius:10px;
-  background:#3b82f6;
-  border:none;
+  background:#020617;
+  border:1px solid #334155;
   color:white;
 }
 
-/* MODAL FIX */
+.submit{
+  width:100%;
+  margin-top:26px;
+  padding:16px;
+  border-radius:12px;
+  background:#3b82f6;
+  border:none;
+  color:white;
+  font-weight:600;
+}
+
+.progress-wrapper{
+  height:10px;
+  background:#020617;
+  border-radius:20px;
+  margin:16px 0;
+}
+
+.progress-bar{
+  height:10px;
+  background:#22c55e;
+  width:0%;
+}
+
 .modal{
   display:none;
   position:fixed;
@@ -126,8 +157,8 @@ body{
   align-items:center;
 }
 
-.modalContent{
+.modal-content{
   background:#1e293b;
-  padding:20px;
-  border-radius:12px;
+  padding:24px;
+  border-radius:14px;
 }
