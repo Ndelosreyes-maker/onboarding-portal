@@ -1,156 +1,186 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Legendary Therapy Document Portal</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<title>Legendary Therapy Portal</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="app">
+<header class="topbar">
+  <h1>Legendary Therapy Document Portal</h1>
+  <p>Secure HR onboarding</p>
+</header>
 
-  <!-- HEADER -->
-  <header class="topbar">
-    <h1>Legendary Therapy Document Portal</h1>
-    <p>Upload your HR documents securely, anytime and anywhere</p>
-  </header>
+<div class="container">
 
-  <div class="container">
+<!-- SEARCH -->
+<div id="searchScreen">
 
-    <!-- SEARCH SCREEN -->
-    <div id="searchScreen">
+  <div class="card">
+    <h2>Find Your Profile</h2>
 
-      <div class="card search-card">
-        <h2>Find Your Profile</h2>
-        <p class="sub">Enter your Portal ID to access your document portal</p>
-
-        <div class="searchRow">
-          <input id="portalId" placeholder="Enter your Portal ID" />
-          <button id="findBtn">Find</button>
-        </div>
-
-        <div id="profileResult"></div>
-      </div>
-
-      <div class="card welcome-card">
-        <div class="icon">👤</div>
-        <h3>Welcome to the Document Portal</h3>
-        <p>Enter your Portal ID above to begin</p>
-      </div>
-
+    <div class="searchRow">
+      <input id="portalId" placeholder="Enter Portal ID">
+      <button id="findBtn">Find</button>
     </div>
 
-    <!-- PORTAL SCREEN -->
-    <div id="portalScreen" style="display:none;">
-
-      <!-- PROFILE HEADER -->
-      <div class="card profile-header">
-        <div class="icon big">👤</div>
-        <h2 id="employeeName"></h2>
-
-        <div class="profile-actions">
-          <button id="refreshBtn" onclick="lookup()">Refresh</button>
-          <button onclick="location.reload()">Change Employee</button>
-        </div>
-      </div>
-
-      <!-- PROGRESS -->
-      <div class="counts" id="counts"></div>
-
-      <div class="progress-wrapper">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-
-      <!-- DOCUMENT CARDS -->
-      <div id="docList" class="doc-grid">
-
-        <!-- SSN -->
-        <div class="docCard" data-col="color_mm02nvg7">
-          <div class="docHeader">
-            <div class="docIcon">📄</div>
-            <div class="docTitle">SSN</div>
-            <div class="statusBadge pending">Pending</div>
-          </div>
-
-          <div class="uploadBox">
-            <input type="file" name="file_mm027d47" class="fileInput">
-            <div class="uploadInner">
-              <div class="uploadIcon">⬆</div>
-              <div>Drop file or click to upload</div>
-              <small>PDF, DOC, JPG, PNG</small>
-            </div>
-          </div>
-        </div>
-
-        <!-- PETS -->
-        <div class="docCard" data-col="color_mm02f6sk">
-          <div class="docHeader">
-            <div class="docIcon">📄</div>
-            <div class="docTitle">PETS</div>
-            <div class="statusBadge pending">Pending</div>
-          </div>
-
-          <div class="uploadBox">
-            <input type="file" name="file_mm02dgx5" class="fileInput">
-            <div class="uploadInner">
-              <div class="uploadIcon">⬆</div>
-              <div>Drop file or click to upload</div>
-              <small>PDF, DOC, JPG, PNG</small>
-            </div>
-          </div>
-        </div>
-
-        <!-- Statewide -->
-        <div class="docCard" data-col="color_mm02w1nr">
-          <div class="docHeader">
-            <div class="docIcon">📄</div>
-            <div class="docTitle">Statewide</div>
-            <div class="statusBadge pending">Pending</div>
-          </div>
-
-          <div class="uploadBox">
-            <input type="file" name="file_mm02vxj1" class="fileInput">
-            <div class="uploadInner">
-              <div class="uploadIcon">⬆</div>
-              <div>Drop file or click to upload</div>
-              <small>PDF, DOC, JPG, PNG</small>
-            </div>
-          </div>
-        </div>
-
-        <!-- I-9 -->
-        <div class="docCard" data-col="color_mm02wex8">
-          <div class="docHeader">
-            <div class="docIcon">📄</div>
-            <div class="docTitle">I-9</div>
-            <div class="statusBadge pending">Pending</div>
-          </div>
-
-          <div class="uploadBox">
-            <input type="file" name="file_mm02wc6g" class="fileInput">
-            <div class="uploadInner">
-              <div class="uploadIcon">⬆</div>
-              <div>Drop file or click to upload</div>
-              <small>PDF, DOC, JPG, PNG</small>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- SUBMIT -->
-      <button id="submitBtn" class="submit">Submit Documents</button>
-
-    </div>
-
+    <div id="profileResult"></div>
   </div>
 
 </div>
 
-<!-- TOAST -->
+<!-- PORTAL -->
+<div id="portalScreen" style="display:none;">
+
+  <div class="card profile-header">
+    <div class="icon">👤</div>
+    <h2 id="employeeName"></h2>
+
+    <div class="profile-actions">
+      <button id="refreshBtn">Refresh</button>
+      <button onclick="location.reload()">Change Employee</button>
+    </div>
+  </div>
+
+  <div id="counts" class="counts"></div>
+
+  <div class="progress-wrapper">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- DOCUMENT GRID -->
+  <div id="docList" class="doc-grid">
+
+    <!-- Resume -->
+    <div class="docCard" data-col="color_mm01pv4x">
+      <div class="docHeader">
+        <div class="docIcon">📄</div>
+        <div class="docTitle">Resume</div>
+        <div class="statusBadge pending">Pending</div>
+      </div>
+      <div class="uploadBox">
+        <input type="file" name="file_mm01pv4x" class="fileInput">
+        <div class="uploadInner">Upload Resume</div>
+      </div>
+    </div>
+
+    <!-- Signed Contract -->
+    <div class="docCard" data-col="color_mm02syqk">
+      <div class="docHeader">
+        <div class="docIcon">📄</div>
+        <div class="docTitle">Signed Contract</div>
+        <div class="statusBadge pending">Pending</div>
+      </div>
+      <div class="uploadBox">
+        <input type="file" name="file_mm02syqk" class="fileInput">
+        <div class="uploadInner">Upload Contract</div>
+      </div>
+    </div>
+
+    <!-- SSN -->
+    <div class="docCard" data-col="color_mm027d47">
+      <div class="docHeader">
+        <div class="docIcon">📄</div>
+        <div class="docTitle">SSN</div>
+        <div class="statusBadge pending">Pending</div>
+      </div>
+      <div class="uploadBox">
+        <input type="file" name="file_mm027d47" class="fileInput">
+        <div class="uploadInner">Upload SSN</div>
+      </div>
+    </div>
+
+    <!-- PETS -->
+    <div class="docCard" data-col="color_mm02dgx5">
+      <div class="docHeader">
+        <div class="docIcon">📄</div>
+        <div class="docTitle">PETS</div>
+        <div class="statusBadge pending">Pending</div>
+      </div>
+      <div class="uploadBox">
+        <input type="file" name="file_mm02dgx5" class="fileInput">
+        <div class="uploadInner">Upload PETS</div>
+      </div>
+    </div>
+
+    <!-- Statewide -->
+    <div class="docCard" data-col="color_mm02vxj1">
+      <div class="docHeader">
+        <div class="docIcon">📄</div>
+        <div class="docTitle">Statewide</div>
+        <div class="statusBadge pending">Pending</div>
+      </div>
+      <div class="uploadBox">
+        <input type="file" name="file_mm02vxj1" class="fileInput">
+        <div class="uploadInner">Upload Statewide</div>
+      </div>
+    </div>
+
+    <!-- I9 -->
+    <div class="docCard" data-col="color_mm02wc6g">
+      <div class="docHeader">
+        <div class="docIcon">📄</div>
+        <div class="docTitle">I-9</div>
+        <div class="statusBadge pending">Pending</div>
+      </div>
+      <div class="uploadBox">
+        <input type="file" name="file_mm02wc6g" class="fileInput">
+        <div class="uploadInner">Upload I-9</div>
+      </div>
+    </div>
+
+    <!-- Physical -->
+    <div class="docCard" data-col="color_mm02tfs6">
+      <div class="docHeader">
+        <div class="docIcon">📄</div>
+        <div class="docTitle">Physical</div>
+        <div class="statusBadge pending">Pending</div>
+      </div>
+      <input type="date" id="physicalExp" class="expDate">
+      <div class="uploadBox">
+        <input type="file" name="file_mm02tfs6" class="fileInput">
+        <div class="uploadInner">Upload Physical</div>
+      </div>
+    </div>
+
+    <!-- Liability -->
+    <div class="docCard" data-col="color_mm02q4hg">
+      <div class="docHeader">
+        <div class="docIcon">📄</div>
+        <div class="docTitle">Liability Insurance</div>
+        <div class="statusBadge pending">Pending</div>
+      </div>
+      <input type="date" id="liabilityExp" class="expDate">
+      <div class="uploadBox">
+        <input type="file" name="file_mm02q4hg" class="fileInput">
+        <div class="uploadInner">Upload Liability</div>
+      </div>
+    </div>
+
+    <!-- Registration -->
+    <div class="docCard" data-col="color_mm02xndg">
+      <div class="docHeader">
+        <div class="docIcon">📄</div>
+        <div class="docTitle">Registration</div>
+        <div class="statusBadge pending">Pending</div>
+      </div>
+      <input type="date" id="registrationExp" class="expDate">
+      <div class="uploadBox">
+        <input type="file" name="file_mm02xndg" class="fileInput">
+        <div class="uploadInner">Upload Registration</div>
+      </div>
+    </div>
+
+  </div>
+
+  <button id="submitBtn" class="submit">Submit Documents</button>
+
+</div>
+</div>
+
 <div id="toast"></div>
 
-<!-- MODAL -->
 <div id="modal" class="modal">
   <div class="modal-content">
     <p>Submit documents?</p>
@@ -160,14 +190,5 @@
 </div>
 
 <script src="script.js"></script>
-
-<script>
-  // Make upload boxes clickable
-  document.querySelectorAll(".uploadBox").forEach(box=>{
-    const input = box.querySelector(".fileInput");
-    box.addEventListener("click", ()=> input.click());
-  });
-</script>
-
 </body>
 </html>
